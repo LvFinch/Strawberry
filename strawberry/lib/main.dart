@@ -1,51 +1,47 @@
 /*
  * -> Author : Akko
  * -> Date : 2020-05-18 17:15:23
- * -> LastEditTime : 2020-05-19 10:11:26
+ * -> LastEditTime : 2020-05-20 00:35:35
  * -> LastEditors : Akko
  * -> Description : Strawberry
  * -> FilePath : \strawberry\lib\main.dart
  * -> Copyright  © 2020 Akko All rights reserved.
  */
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-void main() => runApp(MyApp());
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:strawberry/pages/home_page.dart';
+import 'package:strawberry/routes/bottom_appbar_setting.dart';
+import 'package:strawberry/routes/test_route.dart';
+
+void main() {
+  runApp(MyApp());
+  if (Platform.isAndroid) {
+    // 以下两行 设置android状态栏为透明的沉浸。写在组件渲染之后，是为了在渲染后进行set赋值，覆盖状态栏，写在渲染之前MaterialApp组件会覆盖掉这个值。
+    SystemUiOverlayStyle systemUiOverlayStyle =
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '草莓 - 效率APP',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          textBaseline: TextBaseline.alphabetic,
+        title: '草莓 - 效率APP',
+        // initialRoute: "/",//名为"/"的路由作为应用的home(首页)
+        theme: ThemeData(
+          primarySwatch: Colors.pink,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-      ),
-    );
+        routes: {
+          // "/": (context) =>
+          //     MyHomePage(title: 'Flutter Demo Home Page'), //注册首页路由
+          "test_route": (context) => TestRoute(),
+          "home_bottom_appbar_setting_route": (context) => HomeBottomAppBarSettingRoute(),
+        },
+        home: MyHomePage(title: 'Flutter Demo Home Page'),
+        );
   }
 }
