@@ -1,7 +1,7 @@
 /*
  * -> Author : Akko
  * -> Date : 2020-05-18 17:15:23
- * -> LastEditTime : 2020-05-20 00:35:35
+ * -> LastEditTime : 2020-05-20 16:43:40
  * -> LastEditors : Akko
  * -> Description : Strawberry
  * -> FilePath : \strawberry\lib\main.dart
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         title: '草莓 - 效率APP',
         // initialRoute: "/",//名为"/"的路由作为应用的home(首页)
         theme: ThemeData(
-          primarySwatch: Colors.pink,
+          primarySwatch: Colors.pink[50],
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         routes: {
