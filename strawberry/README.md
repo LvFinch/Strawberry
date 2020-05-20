@@ -49,3 +49,46 @@
 ## 三
 
 # Strawberry开发心得
+
+## 一 Card
+
+### 实现圆角
+
+```dart
+Card(
+	shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusDirectional.circular(20)),//圆角值
+    clipBehavior: Clip.antiAlias,
+)
+```
+
+### 实现模糊
+
+```dart
+child: Container(
+    height: 500,
+    child: Stack(children: <Widget>[
+        Image.network(
+            "https://akringblog.com/wp-content/uploads/2019/02/1_d-800x500.jpg",
+            width: double.maxFinite,
+            height: double.maxFinite,
+            fit: BoxFit.cover,
+        ),
+        ClipRect(
+            child: BackdropFilter(
+                //背景滤镜
+                filter: ImageFilter.blur(
+                    sigmaX: 5.0,
+                    sigmaY: 5.0,
+                ), //图片模糊过滤，横向竖向都设置5.0
+                child: Opacity(
+                    opacity: 0.3, //透明度
+                    child: Container(
+                        decoration: BoxDecoration(
+                            color:
+                            Colors.grey.shade200), //盒子装饰器，模糊的颜色
+                                ))))
+    ]),
+),
+```
+
